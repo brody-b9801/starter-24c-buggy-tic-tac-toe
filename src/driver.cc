@@ -24,17 +24,20 @@ int main() {
     }
 
     if (MakeMove(board, row, col, current_player)) {
-      if (IsBoardFull(board)) {
-        PrintBoard(board);
-        std::cout << "It's a tie!" << std::endl;
-        break;
-      }
-      char winner = CheckWinner(board);
+      char winner = CheckWinner(board); // have to check winner before checking tie so that if board full, it can still detect win
       if (winner != ' ') {
         PrintBoard(board);
         std::cout << "Player " << winner << " wins!" << std::endl;
         break;
       }
+      
+      if (IsBoardFull(board)) {
+        PrintBoard(board);
+        std::cout << "It's a tie!" << std::endl;
+        break;
+      }
+
+      PrintBoard(board);
       SwitchPlayer(current_player);
     }
   }
